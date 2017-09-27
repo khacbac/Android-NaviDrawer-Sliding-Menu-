@@ -18,7 +18,8 @@ import thoxinhdep.kbbk.fragment.SettingsFragment;
 import thoxinhdep.navigationdrawer.R;
 
 /**
- * Created by doanLV4 on 9/27/2017.
+ * Created by ThoXinhDep on 9/27/2017.
+ *
  */
 
 public abstract class BaseActivity extends AppCompatActivity {

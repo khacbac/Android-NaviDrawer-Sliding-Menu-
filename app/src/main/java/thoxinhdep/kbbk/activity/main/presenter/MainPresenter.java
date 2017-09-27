@@ -6,7 +6,8 @@ import thoxinhdep.kbbk.activity.main.view.IeMainActivity;
 import thoxinhdep.kbbk.constant.Constants;
 
 /**
- * Created by doanLV4 on 9/27/2017.
+ * Created by ThoXinhDep on 9/27/2017.
+ *
  */
 
 public class MainPresenter implements IeMainPresenter, IeMainModel.IeFinishSwitchScreen {

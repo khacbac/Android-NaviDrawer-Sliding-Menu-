@@ -3,9 +3,7 @@ package thoxinhdep.kbbk.activity.privacy;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-
 import thoxinhdep.kbbk.base.BaseActivity;
-
 import thoxinhdep.navigationdrawer.R;
 
 public class PrivacyPolicyActivity extends BaseActivity {

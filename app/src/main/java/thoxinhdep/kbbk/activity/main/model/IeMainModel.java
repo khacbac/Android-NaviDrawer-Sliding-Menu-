@@ -1,7 +1,8 @@
 package thoxinhdep.kbbk.activity.main.model;
 
 /**
- * Created by doanLV4 on 9/27/2017.
+ * Created by ThoXinhDep on 9/27/2017.
+ *
  */
 
 public interface IeMainModel {

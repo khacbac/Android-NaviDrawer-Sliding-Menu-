@@ -17,14 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
 import thoxinhdep.kbbk.untils.NavigateActivityUtils;
 import thoxinhdep.navigationdrawer.R;
-import thoxinhdep.kbbk.activity.about.AboutUsActivity;
 import thoxinhdep.kbbk.activity.main.presenter.IeMainPresenter;
 import thoxinhdep.kbbk.activity.main.presenter.MainPresenter;
 import thoxinhdep.kbbk.base.BaseActivity;
-import thoxinhdep.kbbk.activity.privacy.PrivacyPolicyActivity;
 import thoxinhdep.kbbk.constant.Constants;
 import thoxinhdep.kbbk.other.CircleTransform;
 
