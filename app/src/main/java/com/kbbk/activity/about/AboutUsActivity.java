@@ -1,18 +1,43 @@
-package info.androidhive.navigationdrawer.activity;
+package com.kbbk.activity.about;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
+
+import com.kbbk.base.BaseActivity;
 
 import info.androidhive.navigationdrawer.R;
 
-public class PrivacyPolicyActivity extends AppCompatActivity {
+public class AboutUsActivity extends BaseActivity {
+
+    private static final String TAG = AboutUsActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_privacy_policy);
+        Log.d(TAG, "onCreate: About Us Activity");
+        setContentView(R.layout.activity_about_us);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void listenerOnClickEvent() {
+
+    }
+
+    @Override
+    public void onEnter() {
+        Log.d(TAG, "onEnter: About Us Activity");
     }
 
     @Override

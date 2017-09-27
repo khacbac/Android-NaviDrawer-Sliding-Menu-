@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.kbbk.activity.main.view.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,10 +21,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.AboutUsActivity"
+            android:name="com.kbbk.activity.about.AboutUsActivity"
             android:label="@string/activity_title_about_us" />
         <activity
-            android:name=".activity.PrivacyPolicyActivity"
+            android:name="com.kbbk.activity.privacy.PrivacyPolicyActivity"
             android:label="@string/activity_title_privacy_policy" />
     </application>
 
