@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="info.androidhive.navigationdrawer">
+    package="thoxinhdep.navigationdrawer">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.kbbk.activity.main.view.MainActivity"
+            android:name="thoxinhdep.kbbk.activity.main.view.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,10 +21,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.kbbk.activity.about.AboutUsActivity"
+            android:name="thoxinhdep.kbbk.activity.about.AboutUsActivity"
             android:label="@string/activity_title_about_us" />
         <activity
-            android:name="com.kbbk.activity.privacy.PrivacyPolicyActivity"
+            android:name="thoxinhdep.kbbk.activity.privacy.PrivacyPolicyActivity"
             android:label="@string/activity_title_privacy_policy" />
     </application>
 
