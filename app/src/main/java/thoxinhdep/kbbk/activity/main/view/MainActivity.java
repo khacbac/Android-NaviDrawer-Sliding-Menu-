@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import thoxinhdep.kbbk.untils.NavigateActivityUtils;
 import thoxinhdep.navigationdrawer.R;
 import thoxinhdep.kbbk.activity.about.AboutUsActivity;
 import thoxinhdep.kbbk.activity.main.presenter.IeMainPresenter;
@@ -255,13 +257,13 @@ public class MainActivity extends BaseActivity implements IeMainActivity{
     @Override
     public void switchToAboutActivity() {
         // launch new intent instead of loading fragment
-        handleSwitchScreenTo(AboutUsActivity.class);
+        NavigateActivityUtils.handleSwitchToAboutScreen(this);
     }
 
     @Override
     public void switchToPrivacyActivity() {
         // launch new intent instead of loading fragment
-        handleSwitchScreenTo(PrivacyPolicyActivity.class);
+        NavigateActivityUtils.handleSwitchToPrivacyScreen(this);
     }
 
     @Override

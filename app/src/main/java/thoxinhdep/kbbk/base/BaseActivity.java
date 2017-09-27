@@ -41,11 +41,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     public abstract void listenerOnClickEvent();
     public abstract void onEnter();
 
-    public void handleSwitchScreenTo(Class activityTo) {
-        Intent intent = new Intent(this,activityTo);
-        startActivity(intent);
-    }
-
     public void handleSwitchFragmentTo(final String fragmentTag) {
         // Sometimes, when fragment has huge data, screen seems hanging
         // when switching between navigation menus
