@@ -42,18 +42,18 @@ public class FragmentController extends BaseController {
 //
 //    private Fragment getHomeFragment(String fragmentTag) {
 //        switch (fragmentTag) {
-//            case Constants.TAG_HOME:
-//                return new HomeFragment();
-//            case Constants.TAG_PHOTOS:
-//                return new PhotosFragment();
-//            case Constants.TAG_MOVIES:
-//                return new MoviesFragment();
-//            case Constants.TAG_NOTIFICATIONS:
+//            case Constants.TAG_TIEUDIEM:
+//                return new TieuDiemFragment();
+//            case Constants.TAG_NOTIFICATION:
+//                return new MoiDangFragment();
+//            case Constants.TAG_NGAUNHIEN:
+//                return new NhieuNhatFragment();
+//            case Constants.TAG_DOCNHIEUNHAT:
+//                return new NgauNhienFragment();
+//            case Constants.TAG_MOIDANG:
 //                return new NotificationsFragment();
-//            case Constants.TAG_SETTINGS:
-//                return new SettingsFragment();
 //            default:
-//                return new HomeFragment();
+//                return new TieuDiemFragment();
 //        }
 //    }
 }

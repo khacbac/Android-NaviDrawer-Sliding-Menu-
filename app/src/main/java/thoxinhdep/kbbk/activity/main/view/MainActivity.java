@@ -17,6 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import java.util.ArrayList;
+
 import thoxinhdep.kbbk.untils.NavigateActivityUtils;
 import thoxinhdep.navigationdrawer.R;
 import thoxinhdep.kbbk.activity.main.presenter.IeMainPresenter;
@@ -42,8 +45,8 @@ public class MainActivity extends BaseActivity implements IeMainActivity{
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate: Main Activity");
         if (savedInstanceState == null) {
-            navigationView.setCheckedItem(R.id.nav_home);
-            handleSwitchFragmentTo(Constants.TAG_HOME);
+            navigationView.setCheckedItem(R.id.nav_tieudiem);
+            handleSwitchFragmentTo(Constants.TAG_TIEUDIEM);
         }
     }
 
@@ -134,7 +137,7 @@ public class MainActivity extends BaseActivity implements IeMainActivity{
                 .into(imgProfile);
 
         // showing dot next to notifications label
-        navigationView.getMenu().getItem(3).setActionView(R.layout.menu_dot);
+        navigationView.getMenu().getItem(4).setActionView(R.layout.menu_dot);
     }
 
     @Override
@@ -172,9 +175,9 @@ public class MainActivity extends BaseActivity implements IeMainActivity{
             return;
         }
         if (!isHomeFragment) {
-            navigationView.setCheckedItem(R.id.nav_home);
+            navigationView.setCheckedItem(R.id.nav_tieudiem);
             showToggleButton();
-            handleSwitchFragmentTo(Constants.TAG_HOME);
+            handleSwitchFragmentTo(Constants.TAG_TIEUDIEM);
             return;
         }
 
@@ -186,11 +189,11 @@ public class MainActivity extends BaseActivity implements IeMainActivity{
         // Inflate the menu; this adds items to the action bar if it is present.
         Log.d(TAG, "onCreateOptionsMenu: current tag = " + CURRENT_TAG);
         // show menu only when home fragment is selected
-        if (CURRENT_TAG.equals(Constants.TAG_HOME)) {
+        if (CURRENT_TAG.equals(Constants.TAG_TIEUDIEM)) {
             getMenuInflater().inflate(R.menu.main, menu);
         }
         // when fragment is notifications, load the menu created for notifications
-        if (CURRENT_TAG.equals(Constants.TAG_NOTIFICATIONS)) {
+        if (CURRENT_TAG.equals(Constants.TAG_DOCNHIEUNHAT)) {
             getMenuInflater().inflate(R.menu.notifications, menu);
         }
         return true;
@@ -227,28 +230,33 @@ public class MainActivity extends BaseActivity implements IeMainActivity{
     }
 
     @Override
-    public void showHomeFragment(String tagHome) {
-        handleSwitchFragmentTo(tagHome);
+    public void showTieuDiemFragment(String tagTieuDiem) {
+        handleSwitchFragmentTo(tagTieuDiem);
     }
 
     @Override
-    public void showPhotosFragment(String tagPhotos) {
-        handleSwitchFragmentTo(tagPhotos);
+    public void showMoiDangFragment(String tagMoiDang) {
+        handleSwitchFragmentTo(tagMoiDang);
     }
 
     @Override
-    public void showMoviesFragment(String tagMovies) {
-        handleSwitchFragmentTo(tagMovies);
+    public void showNhieuNhatFragment(String tagNhieuNhat) {
+        handleSwitchFragmentTo(tagNhieuNhat);
     }
 
     @Override
-    public void showNotificationsFragment(String tagNotifications) {
-        handleSwitchFragmentTo(tagNotifications);
+    public void showNgauNhienFragment(String tagNgauNhien) {
+        handleSwitchFragmentTo(tagNgauNhien);
     }
 
     @Override
-    public void showSettingsFragment(String tagSettings) {
-        handleSwitchFragmentTo(tagSettings);
+    public void showNotificationsFragment(String tagNotification) {
+        handleSwitchFragmentTo(tagNotification);
+    }
+
+    @Override
+    public void showTheLoaiFragment(String tagTheLoai) {
+
     }
 
     @Override
@@ -283,4 +291,5 @@ public class MainActivity extends BaseActivity implements IeMainActivity{
             drawer.closeDrawers();
         }
     }
+
 }

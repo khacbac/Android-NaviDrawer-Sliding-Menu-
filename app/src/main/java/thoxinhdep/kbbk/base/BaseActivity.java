@@ -1,6 +1,5 @@
 package thoxinhdep.kbbk.base;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -9,11 +8,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import thoxinhdep.kbbk.constant.Constants;
-import thoxinhdep.kbbk.fragment.HomeFragment;
-import thoxinhdep.kbbk.fragment.MoviesFragment;
+import thoxinhdep.kbbk.fragment.MoiDangFragment;
+import thoxinhdep.kbbk.fragment.NhieuNhatFragment;
 import thoxinhdep.kbbk.fragment.NotificationsFragment;
-import thoxinhdep.kbbk.fragment.PhotosFragment;
-import thoxinhdep.kbbk.fragment.SettingsFragment;
+import thoxinhdep.kbbk.fragment.TheLoaiFragment;
+import thoxinhdep.kbbk.fragment.tieudiem.view.TieuDiemFragment;
+import thoxinhdep.kbbk.fragment.NgauNhienFragment;
 
 import thoxinhdep.navigationdrawer.R;
 
@@ -69,26 +69,29 @@ public abstract class BaseActivity extends AppCompatActivity {
         setToolbarTitle(fragmentTag);
         isHomeFragment = false;
         switch (fragmentTag) {
-            case Constants.TAG_HOME:
+            case Constants.TAG_TIEUDIEM:
                 isHomeFragment = true;
-                CURRENT_TAG = Constants.TAG_HOME;
-                return new HomeFragment();
-            case Constants.TAG_PHOTOS:
-                CURRENT_TAG = Constants.TAG_PHOTOS;
-                return new PhotosFragment();
-            case Constants.TAG_MOVIES:
-                CURRENT_TAG = Constants.TAG_MOVIES;
-                return new MoviesFragment();
-            case Constants.TAG_NOTIFICATIONS:
-                CURRENT_TAG = Constants.TAG_NOTIFICATIONS;
+                CURRENT_TAG = Constants.TAG_TIEUDIEM;
+                return new TieuDiemFragment();
+            case Constants.TAG_NOTIFICATION:
+                CURRENT_TAG = Constants.TAG_NOTIFICATION;
+                return new MoiDangFragment();
+            case Constants.TAG_NGAUNHIEN:
+                CURRENT_TAG = Constants.TAG_NGAUNHIEN;
+                return new NhieuNhatFragment();
+            case Constants.TAG_DOCNHIEUNHAT:
+                CURRENT_TAG = Constants.TAG_DOCNHIEUNHAT;
+                return new NgauNhienFragment();
+            case Constants.TAG_MOIDANG:
+                CURRENT_TAG = Constants.TAG_MOIDANG;
                 return new NotificationsFragment();
-            case Constants.TAG_SETTINGS:
-                CURRENT_TAG = Constants.TAG_SETTINGS;
-                return new SettingsFragment();
+            case Constants.TAG_THELOAITRUYEN:
+                CURRENT_TAG = Constants.TAG_THELOAITRUYEN;
+                return new TheLoaiFragment();
             default:
                 isHomeFragment = true;
-                CURRENT_TAG = Constants.TAG_HOME;
-                return new HomeFragment();
+                CURRENT_TAG = Constants.TAG_TIEUDIEM;
+                return new TieuDiemFragment();
         }
     }
 

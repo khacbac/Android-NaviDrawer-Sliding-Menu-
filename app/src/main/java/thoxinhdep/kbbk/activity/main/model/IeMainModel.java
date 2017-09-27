@@ -1,5 +1,7 @@
 package thoxinhdep.kbbk.activity.main.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by ThoXinhDep on 9/27/2017.
  *
@@ -14,5 +16,4 @@ public interface IeMainModel {
     }
 
     void showFragmentOrActivityById(int itemId, IeFinishSwitchScreen finishSwitchScreen);
-
 }

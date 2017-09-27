@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="thoxinhdep.kbbk.fragment.NotificationsFragment">
+    tools:context="thoxinhdep.kbbk.fragment.NgauNhienFragment">
 
     <ImageView
         android:layout_width="100dp"

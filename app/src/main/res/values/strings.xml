@@ -7,11 +7,12 @@
     <string name="closeDrawer">close_drawer</string>
 
     <!-- Navigation Drawer menu labels -->
-    <string name="nav_home">Home</string>
-    <string name="nav_photos">Photos</string>
-    <string name="nav_movies">Movies</string>
-    <string name="nav_notifications">Notifications</string>
-    <string name="nav_settings">Settings</string>
+    <string name="nav_tieudiem">Truyện tranh tiêu điểm</string>
+    <string name="nav_moidang">Truyện mới đăng</string>
+    <string name="nav_docnhieunhat">Truyện đọc nhiều nhất</string>
+    <string name="nav_ngaunhien">Truyện Tranh Ngẫu Nhiên</string>
+    <string name="nav_thongbao">Thông báo &amp; Sự kiện</string>
+    <string name="nav_theloai">Thể loại truyện</string>
     <string name="nav_about_us">About Us</string>
 
     <!-- Toolbar titles when navigation menu item is selected -->
