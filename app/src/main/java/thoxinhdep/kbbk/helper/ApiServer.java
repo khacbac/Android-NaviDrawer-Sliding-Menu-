@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Url;
 import thoxinhdep.kbbk.constant.Constants;
 
 /**
@@ -15,6 +16,9 @@ import thoxinhdep.kbbk.constant.Constants;
 public interface ApiServer {
     @GET("/")
     Call<ResponseBody> getAllHomeInfo();
+
+    @GET
+    Call<ResponseBody> getAllDetailData(@Url String url);
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(Constants.URL_HOME)

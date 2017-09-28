@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="thoxinhdep.kbbk.activity.about.AboutUsActivity"
+            android:name="thoxinhdep.kbbk.activity.tieudiem.view.TieuDiemActivity"
             android:label="@string/activity_title_about_us" />
         <activity
             android:name="thoxinhdep.kbbk.activity.privacy.PrivacyPolicyActivity"

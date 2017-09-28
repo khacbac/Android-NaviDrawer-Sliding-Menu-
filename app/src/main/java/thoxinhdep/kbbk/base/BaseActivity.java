@@ -8,12 +8,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import thoxinhdep.kbbk.constant.Constants;
-import thoxinhdep.kbbk.fragment.MoiDangFragment;
-import thoxinhdep.kbbk.fragment.NhieuNhatFragment;
-import thoxinhdep.kbbk.fragment.NotificationsFragment;
-import thoxinhdep.kbbk.fragment.TheLoaiFragment;
-import thoxinhdep.kbbk.fragment.tieudiem.view.TieuDiemFragment;
-import thoxinhdep.kbbk.fragment.NgauNhienFragment;
+import thoxinhdep.kbbk.activity.main.fragment.moidang.view.MoiDangFragment;
+import thoxinhdep.kbbk.activity.main.fragment.NhieuNhatFragment;
+import thoxinhdep.kbbk.activity.main.fragment.NotificationsFragment;
+import thoxinhdep.kbbk.activity.main.fragment.TheLoaiFragment;
+import thoxinhdep.kbbk.activity.main.fragment.tieudiem.view.TieuDiemFragment;
+import thoxinhdep.kbbk.activity.main.fragment.NgauNhienFragment;
 
 import thoxinhdep.navigationdrawer.R;
 
@@ -73,17 +73,17 @@ public abstract class BaseActivity extends AppCompatActivity {
                 isHomeFragment = true;
                 CURRENT_TAG = Constants.TAG_TIEUDIEM;
                 return new TieuDiemFragment();
-            case Constants.TAG_NOTIFICATION:
-                CURRENT_TAG = Constants.TAG_NOTIFICATION;
-                return new MoiDangFragment();
-            case Constants.TAG_NGAUNHIEN:
-                CURRENT_TAG = Constants.TAG_NGAUNHIEN;
-                return new NhieuNhatFragment();
-            case Constants.TAG_DOCNHIEUNHAT:
-                CURRENT_TAG = Constants.TAG_DOCNHIEUNHAT;
-                return new NgauNhienFragment();
             case Constants.TAG_MOIDANG:
                 CURRENT_TAG = Constants.TAG_MOIDANG;
+                return new MoiDangFragment();
+            case Constants.TAG_DOCNHIEUNHAT:
+                CURRENT_TAG = Constants.TAG_DOCNHIEUNHAT;
+                return new NhieuNhatFragment();
+            case Constants.TAG_NGAUNHIEN:
+                CURRENT_TAG = Constants.TAG_NGAUNHIEN;
+                return new NgauNhienFragment();
+            case Constants.TAG_NOTIFICATION:
+                CURRENT_TAG = Constants.TAG_NOTIFICATION;
                 return new NotificationsFragment();
             case Constants.TAG_THELOAITRUYEN:
                 CURRENT_TAG = Constants.TAG_THELOAITRUYEN;

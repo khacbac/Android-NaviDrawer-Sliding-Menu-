@@ -44,4 +44,7 @@ dependencies {
     // JSON Parsing
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    // View pager with tabhost.
+//    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+    compile 'com.jpardogo.materialtabstrip:library:1.1.1'
 }

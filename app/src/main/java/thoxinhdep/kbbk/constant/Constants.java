@@ -6,8 +6,15 @@ package thoxinhdep.kbbk.constant;
  */
 
 public class Constants {
-
+    // Home url for get all source.
     public static final String URL_HOME = "http://mangak.info/";
+    // Tag for all menu.
+    public static final String TAG_TIEUDIEM_CLASS = "feature_topxem";
+    public static final String TAG_MOIDANG_CLASS = "moiup";
+    public static final String TAG_DOCNHIEUNHAT_CLASS = "doc_nhieu";
+    public static final String TAG_NGAUNHIEN_CLASS = "top_thang";
+    public static final String TAG_THONGBAO_CLASS = "feature_hot_home";
+    public static final String TAG_THELOAI_CLASS = "theloai";
 
     // urls to load navigation header background image.
     public static final String URL_NAV_HEADER_BG = "http://api.androidhive.info/images/nav-menu-header-bg.jpg";
