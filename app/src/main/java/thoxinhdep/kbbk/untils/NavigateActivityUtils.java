@@ -3,6 +3,7 @@ package thoxinhdep.kbbk.untils;
 import android.app.Activity;
 import android.content.Intent;
 
+import thoxinhdep.kbbk.activity.doc.DocActivity;
 import thoxinhdep.kbbk.activity.tieudiem.view.TieuDiemActivity;
 import thoxinhdep.kbbk.activity.privacy.PrivacyPolicyActivity;
 import thoxinhdep.kbbk.constant.Constants;
@@ -27,6 +28,12 @@ public class NavigateActivityUtils {
 
     public static void handleSwitchToPrivacyScreen(Activity activity) {
         Intent intent = new Intent(activity, PrivacyPolicyActivity.class);
+        activity.startActivity(intent);
+    }
+
+    public static void handleSwitchToDocScreen(Activity activity, String url) {
+        Intent intent = new Intent(activity, DocActivity.class);
+        intent.putExtra(Constants.TAG_DOCSCREEN, url);
         activity.startActivity(intent);
     }
 }

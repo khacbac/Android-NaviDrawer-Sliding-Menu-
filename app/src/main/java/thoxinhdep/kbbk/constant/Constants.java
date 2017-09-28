@@ -29,4 +29,7 @@ public class Constants {
     public static final String TAG_NOTIFICATION = "Thông báo & Sự kiện";
     public static final String TAG_THELOAITRUYEN = "Thể loại truyện";
     public static String CURRENT_TAG = TAG_TIEUDIEM;
+
+    public static final String TAG_DOCSCREEN = "Man hinh doc truyen";
+
 }

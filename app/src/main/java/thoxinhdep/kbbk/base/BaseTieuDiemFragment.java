@@ -25,13 +25,20 @@ public abstract class BaseTieuDiemFragment extends BaseFragment implements IeTie
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        super.onCreateView(inflater, container, savedInstanceState);
+        // start listener event from activity.
+        ((TieuDiemActivity)getActivity()).setOnTieuDiemListener(this);
+        return null;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        ((TieuDiemActivity)context).setOnTieuDiemListener(this);
+    }
+
+    @Override
+    public void initAllData() {
+
     }
 
     @Override

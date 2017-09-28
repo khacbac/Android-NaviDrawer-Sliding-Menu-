@@ -2,6 +2,10 @@ package thoxinhdep.kbbk.activity.tieudiem.fragment.chapter.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +13,13 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,6 +28,11 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import thoxinhdep.kbbk.activity.main.fragment.tieudiem.adapter.CustomTieuDiemAdapter;
+import thoxinhdep.kbbk.activity.tieudiem.fragment.adapter.CustomChapterAdapter;
+import thoxinhdep.kbbk.activity.tieudiem.fragment.chapter.entity.ChapterView;
+import thoxinhdep.kbbk.activity.tieudiem.fragment.chapter.presenter.ChapterPresenter;
+import thoxinhdep.kbbk.activity.tieudiem.fragment.chapter.presenter.IeChapterPresenter;
 import thoxinhdep.kbbk.base.BaseFragment;
 import thoxinhdep.kbbk.base.BaseTieuDiemFragment;
 import thoxinhdep.kbbk.constant.Constants;
@@ -29,21 +44,17 @@ import thoxinhdep.navigationdrawer.R;
  */
 
 // In this case, the fragment displays simple text based on the page
-public class ChapterFragment extends BaseTieuDiemFragment {
+public class ChapterFragment extends BaseTieuDiemFragment implements IeChapterFragment{
     public static final String ARG_PAGE = "ARG_PAGE";
     private static final String TAG = ChapterFragment.class.getSimpleName();
-    @BindView(R.id.tvTitle)
-    TextView txtTitle;
 
-    private int mPage;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
 
-    public static ChapterFragment newInstance(int page) {
-        Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, page);
-        ChapterFragment fragment = new ChapterFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private IeChapterPresenter ieChapterPresenter;
+    private ArrayList<ChapterView> listTieuDiem = new ArrayList<>();
+    private CustomChapterAdapter layoutAdapter;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,12 +75,16 @@ public class ChapterFragment extends BaseTieuDiemFragment {
 
     @Override
     public void initAllView() {
-
+        ieChapterPresenter = new ChapterPresenter(this);
+        layoutAdapter = new CustomChapterAdapter(getActivity());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(layoutAdapter);
     }
 
     @Override
     public void initAllData() {
-        txtTitle.setText("Fragment Chapter");
     }
 
     @Override
@@ -80,28 +95,16 @@ public class ChapterFragment extends BaseTieuDiemFragment {
     @Override
     public void onLoadListChapter(String url) {
         super.onLoadListChapter(url);
-        Log.d(TAG, "onLoadListChapter: url = " + url);
-        String test = url.replaceAll(Constants.URL_HOME,"");
-        Log.d(TAG, "initAllData: test = " + test);
+        ieChapterPresenter.loadAllChapter(url);
+    }
 
-        Call<ResponseBody> getAllDataDetail = ApiUtils.getApiServer().getAllDetailData(test);
-        getAllDataDetail.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    String html = response.body().string();
-                    Log.d(TAG, "onResponse: html = " + html);
-                    txtTitle.setText(html);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Log.d(TAG, "onFailure: get error");
-                }
-            }
+    @Override
+    public void onSuccessLoadAllChapter(ArrayList<ChapterView> listChapter) {
+        layoutAdapter.setChapterList(listChapter);
+    }
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d(TAG, "onFailure: get error");
-            }
-        });
+    @Override
+    public void onErrorLoadAllChapter() {
+
     }
 }

@@ -5,4 +5,5 @@ package thoxinhdep.kbbk.activity.tieudiem.fragment.chapter.presenter;
  */
 
 public interface IeChapterPresenter {
+    void loadAllChapter(String urlGet);
 }
