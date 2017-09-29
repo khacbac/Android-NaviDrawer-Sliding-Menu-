@@ -1,4 +1,4 @@
-package thoxinhdep.kbbk.activity.doc;
+package thoxinhdep.kbbk.activity.doc.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +7,10 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -24,6 +28,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import thoxinhdep.kbbk.activity.doc.adapter.CustomDocAdapter;
 import thoxinhdep.kbbk.activity.doc.entity.DocView;
+import thoxinhdep.kbbk.activity.doc.presenter.DocTruyenPresenter;
+import thoxinhdep.kbbk.activity.doc.presenter.IeDocTruyenPresenter;
 import thoxinhdep.kbbk.base.BaseActivity;
 import thoxinhdep.kbbk.constant.Constants;
 import thoxinhdep.kbbk.helper.ApiUtils;
@@ -33,16 +39,17 @@ import thoxinhdep.navigationdrawer.R;
  * Created by VST on 9/28/2017.
  */
 
-public class DocActivity extends BaseActivity {
+public class DocTruyenActivity extends BaseActivity implements IeDocTruyenActivity{
 
-    private static final String TAG = DocActivity.class.getSimpleName();
-    private String intentUrl;
+    private static final String TAG = DocTruyenActivity.class.getSimpleName();
 
-    private ArrayList<DocView> listDocView = new ArrayList<>();
     private CustomDocAdapter layoutAdapter;
+    private IeDocTruyenPresenter docTruyenPresenter;
 
     @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
+    RecyclerViewPager recyclerView;
+    @BindView(R.id.aviIndicateView)
+    AVLoadingIndicatorView aviIndicateView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,9 +61,7 @@ public class DocActivity extends BaseActivity {
         setContentView(R.layout.activity_doc);
         ButterKnife.bind(this);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        intentUrl = getIntent().getStringExtra(Constants.TAG_DOCSCREEN);
-        Log.d(TAG, "initView: url = " + intentUrl);
-
+        docTruyenPresenter = new DocTruyenPresenter(this);
         layoutAdapter = new CustomDocAdapter(this);
         RecyclerView.LayoutManager mLayoutManager
                 = new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false);
@@ -67,38 +72,9 @@ public class DocActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        String test = intentUrl.replaceAll(Constants.URL_HOME,"");
-        Call<ResponseBody> getAllDataDetail = ApiUtils.getApiServer().getAllDetailData(test);
-        getAllDataDetail.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                ArrayList<DocView> listDocView = new ArrayList<DocView>();
-                String html = null;
-                try {
-                    html = response.body().string();
-                    Document document = Jsoup.parse(html);
-                    Elements rootElements = document.getElementsByClass("vung_doc");
-                    for (Element element : rootElements) {
-                        Elements imgElements = element.select("img");
-                        for (Element eImg : imgElements) {
-                            String link = eImg.attr("src");
-                            DocView docView = new DocView(link);
-                            listDocView.add(docView);
-                        }
-                    }
-                    layoutAdapter.setDocViewList(listDocView);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
+        String intentUrl = getIntent().getStringExtra(Constants.TAG_DOCSCREEN);
+        String urlTail = intentUrl.replaceAll(Constants.URL_HOME,"");
+        docTruyenPresenter.loadAllTruyenContent(urlTail);
     }
 
     @Override
@@ -126,5 +102,27 @@ public class DocActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSuccessLoadContnet(ArrayList<DocView> listDocView) {
+        if (listDocView.size() > 0) {
+            layoutAdapter.setDocViewList(listDocView);
+        }
+    }
+
+    @Override
+    public void onErrorLoadContent() {
+        Toast.makeText(this, "Load error,please try again!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void hideProgressBar() {
+        aviIndicateView.hide();
+    }
+
+    @Override
+    public void showProgressBar() {
+        aviIndicateView.show();
     }
 }

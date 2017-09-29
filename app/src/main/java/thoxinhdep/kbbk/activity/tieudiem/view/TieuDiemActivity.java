@@ -1,18 +1,17 @@
 package thoxinhdep.kbbk.activity.tieudiem.view;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.TextView;
-
 import com.astuetz.PagerSlidingTabStrip;
+import com.wang.avi.AVLoadingIndicatorView;
+
+import java.util.Collections;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import thoxinhdep.kbbk.activity.tieudiem.adapter.FragmentPagerAdapter;
 import thoxinhdep.kbbk.activity.tieudiem.listener.IeTieuDiemListener;
 import thoxinhdep.kbbk.base.BaseActivity;
@@ -24,7 +23,6 @@ public class TieuDiemActivity extends BaseActivity {
 
     private static final String TAG = TieuDiemActivity.class.getSimpleName();
 
-    private IeTieuDiemListener tieuDiemListener;
     private String intentUrl;
 
     @Override
@@ -38,7 +36,6 @@ public class TieuDiemActivity extends BaseActivity {
         setContentView(R.layout.activity_tieudiem);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         intentUrl = getIntent().getStringExtra(Constants.TAG_TIEUDIEM);
         Log.d(TAG, "initView: url from tieu diem = " + intentUrl);
 
@@ -72,24 +69,28 @@ public class TieuDiemActivity extends BaseActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.ordermenu, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
             // finish the activity
             onBackPressed();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
     // Start load data for every Fragment.
     public void setOnTieuDiemListener(IeTieuDiemListener listener) {
-        this.tieuDiemListener = listener;
-        tieuDiemListener.onLoadAllListChapter(intentUrl);
+        listener.onLoadAllListChapter(intentUrl);
     }
 }

@@ -8,10 +8,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.wang.avi.AVLoadingIndicatorView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -50,6 +53,8 @@ public class ChapterFragment extends BaseTieuDiemFragment implements IeChapterFr
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.aviIndicateView)
+    AVLoadingIndicatorView aviIndicateView;
 
     private IeChapterPresenter ieChapterPresenter;
     private ArrayList<ChapterView> listTieuDiem = new ArrayList<>();
@@ -81,6 +86,7 @@ public class ChapterFragment extends BaseTieuDiemFragment implements IeChapterFr
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(layoutAdapter);
+//        setHasOptionsMenu(true);
     }
 
     @Override
@@ -95,16 +101,36 @@ public class ChapterFragment extends BaseTieuDiemFragment implements IeChapterFr
     @Override
     public void onLoadListChapter(String url) {
         super.onLoadListChapter(url);
+        aviIndicateView.show();
         ieChapterPresenter.loadAllChapter(url);
     }
 
     @Override
     public void onSuccessLoadAllChapter(ArrayList<ChapterView> listChapter) {
         layoutAdapter.setChapterList(listChapter);
+        aviIndicateView.hide();
     }
 
     @Override
     public void onErrorLoadAllChapter() {
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_tangdan:
+                Log.d(TAG, "onOptionsItemSelected: sap xep tang dan");
+                layoutAdapter.sortTangDan();
+                break;
+            case R.id.action_giamdan:
+                Log.d(TAG, "onOptionsItemSelected: sap xep giam dan");
+                layoutAdapter.sortGiamDan();
+                break;
+            default:
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -1,12 +1,23 @@
 package thoxinhdep.kbbk.activity.doc.customview;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
+import com.jsibbold.zoomage.ZoomageView;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,8 +30,13 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class DocLayout extends RelativeLayout {
 
+    private static final String TAG = DocLayout.class.getSimpleName();
     @BindView(R.id.imageDocView)
     ImageView imageDocView;
+    @BindView(R.id.aviIndicateView)
+    AVLoadingIndicatorView aviIndicateView;
+
+    private PhotoViewAttacher photoViewAttacher;
 
     public DocLayout(Context context) {
         super(context);
@@ -40,16 +56,29 @@ public class DocLayout extends RelativeLayout {
     private void initData(Context context) {
         inflate(context, R.layout.custom_doc_layout, this);
         ButterKnife.bind(this);
-//        PhotoViewAttacher photoViewAttacher = new PhotoViewAttacher(imageDocView);
-//        photoViewAttacher.update();
+        aviIndicateView.show();
     }
 
     public void setImageUrl(String url) {
         // Loading profile image
-        Glide.with(getContext()).load(url)
-                .crossFade()
-                .thumbnail(0.5f)
-                .centerCrop()
+        Glide.with(getContext())
+                .load(url)
+                .listener(new RequestListener<String, GlideDrawable>() {
+                    @Override
+                    public boolean onException(Exception e, String model,
+                                               Target<GlideDrawable> target, boolean isFirstResource) {
+                        aviIndicateView.show();
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(GlideDrawable resource, String model,
+                                                   Target<GlideDrawable> target,
+                                                   boolean isFromMemoryCache, boolean isFirstResource) {
+                        aviIndicateView.hide();
+                        return false;
+                    }
+                })
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageDocView);
     }

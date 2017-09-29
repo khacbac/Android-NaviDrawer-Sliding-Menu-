@@ -1,8 +1,11 @@
 package thoxinhdep.kbbk.activity.tieudiem.fragment.customview;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,6 +20,7 @@ import thoxinhdep.navigationdrawer.R;
 
 public class ChapterLayout extends LinearLayout {
 
+    private static final String TAG = ChapterLayout.class.getSimpleName();
     @BindView(R.id.txtTitle)
     TextView txtTitle;
     @BindView(R.id.txtNgayDang)
@@ -39,6 +43,9 @@ public class ChapterLayout extends LinearLayout {
 
     private void initData(Context context) {
         setOrientation(HORIZONTAL);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            setBackground(getResources().getDrawable(R.drawable.bg_single_layout));
+        }
         inflate(context, R.layout.chapter_custom_layout, this);
         ButterKnife.bind(this);
     }

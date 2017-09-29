@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.wang.avi.AVLoadingIndicatorView;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -36,6 +38,8 @@ public class TieuDiemFragment extends BaseFragment implements IeTieuDiemFragment
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.avLoadingIndicate)
+    AVLoadingIndicatorView loadingIndicatorView;
 
     public TieuDiemFragment() {
         // Required empty public constructor
@@ -65,6 +69,8 @@ public class TieuDiemFragment extends BaseFragment implements IeTieuDiemFragment
 
     @Override
     public void initAllView() {
+        loadingIndicatorView.show();
+
         ieTieuDiemPresenter = new TieuDiemPresenter(this);
         layoutAdapter = new CustomTieuDiemAdapter(listTieuDiem, getActivity());
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
@@ -104,6 +110,7 @@ public class TieuDiemFragment extends BaseFragment implements IeTieuDiemFragment
     public void onSuccessGetTieuDiemData(ArrayList<TieuDiemView> listTieuDiem) {
         if (listTieuDiem.size() > 0) {
             layoutAdapter.setTieuDiemList(listTieuDiem);
+            loadingIndicatorView.hide();
         }
     }
 

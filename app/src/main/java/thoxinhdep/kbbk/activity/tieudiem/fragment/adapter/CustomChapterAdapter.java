@@ -9,7 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 import thoxinhdep.kbbk.activity.tieudiem.fragment.chapter.entity.ChapterView;
 import thoxinhdep.kbbk.activity.tieudiem.fragment.customview.ChapterLayout;
@@ -42,16 +47,18 @@ public class CustomChapterAdapter extends RecyclerView.Adapter<CustomChapterAdap
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder,
+    public void onBindViewHolder(final MyViewHolder holder,
                                  @SuppressLint("RecyclerView") final int position) {
         final ChapterView chapterView = listChapter.get(position);
         holder.layoutView.setTxtTitle(chapterView.getChapterTitle());
         holder.layoutView.setTxtNgayDang(chapterView.getNgayDang());
-
+        holder.layoutView.setAlpha(0.5f);
         holder.layoutView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: link = " + chapterView.getLink());
+                // Change alpha to know item selecting.
+                holder.layoutView.setAlpha(1f);
                 NavigateActivityUtils.handleSwitchToDocScreen(
                         (Activity) context, chapterView.getLink());
             }
@@ -78,5 +85,46 @@ public class CustomChapterAdapter extends RecyclerView.Adapter<CustomChapterAdap
         notifyDataSetChanged();
     }
 
+    public void sortTangDan() {
+        Collections.sort(listChapter, new Comparator<ChapterView>() {
+            @Override
+            public int compare(ChapterView arg0, ChapterView arg1) {
+                @SuppressLint("SimpleDateFormat")
+                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                int compareResult;
+                try {
+                    Date arg0Date = format.parse(arg0.getNgayDang());
+                    Date arg1Date = format.parse(arg1.getNgayDang());
+                    compareResult = arg0Date.compareTo(arg1Date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    compareResult = arg0.getNgayDang().compareTo(arg1.getNgayDang());
+                }
+                return compareResult;
+            }
+        });
+        notifyDataSetChanged();
+    }
+
+    public void sortGiamDan() {
+        Collections.sort(listChapter, new Comparator<ChapterView>() {
+            @Override
+            public int compare(ChapterView arg0, ChapterView arg1) {
+                @SuppressLint("SimpleDateFormat")
+                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                int compareResult;
+                try {
+                    Date arg0Date = format.parse(arg0.getNgayDang());
+                    Date arg1Date = format.parse(arg1.getNgayDang());
+                    compareResult = arg1Date.compareTo(arg0Date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    compareResult = arg1.getNgayDang().compareTo(arg0.getNgayDang());
+                }
+                return compareResult;
+            }
+        });
+        notifyDataSetChanged();
+    }
 }
 
