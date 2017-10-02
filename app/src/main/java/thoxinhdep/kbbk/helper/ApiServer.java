@@ -17,6 +17,9 @@ public interface ApiServer {
     @GET("/")
     Call<ResponseBody> getAllHomeInfo();
 
+    @GET("wp-content/themes/manga/list-manga-front.js?nocache=1506538619")
+    Call<ResponseBody> getAllHomeData();
+
     @GET
     Call<ResponseBody> getAllDetailData(@Url String url);
 
@@ -24,4 +27,5 @@ public interface ApiServer {
             .baseUrl(Constants.URL_HOME)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
+
 }
