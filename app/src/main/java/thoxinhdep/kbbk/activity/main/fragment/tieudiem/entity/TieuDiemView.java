@@ -5,14 +5,15 @@ package thoxinhdep.kbbk.activity.main.fragment.tieudiem.entity;
  */
 
 public class TieuDiemView {
-    String avatarUrl;
-    String txtTitle;
-    String txtLink;
+    private static final String TAG = TieuDiemView.class.getSimpleName();
+    private String avatarUrl;
+    private String txtTitle;
+    private String txtUrlId;
 
-    public TieuDiemView(String avatarUrl, String txtTitle, String txtLink) {
+    public TieuDiemView(String avatarUrl, String txtTitle, String txtUrlId) {
         this.avatarUrl = avatarUrl;
         this.txtTitle = txtTitle;
-        this.txtLink = txtLink;
+        this.txtUrlId = txtUrlId;
     }
 
     public TieuDiemView() {
@@ -22,8 +23,13 @@ public class TieuDiemView {
         return avatarUrl;
     }
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
+    public void setAvatarUrl(String url) {
+        if (url.isEmpty()) {
+            this.avatarUrl = "https://miscmedia-9gag-fun.9cache.com/images/thumbnail-facebook/1481537858.9056_aZAvYJ_220x220.jpg";
+        } else {
+            this.avatarUrl = url;
+        }
+
     }
 
     public String getTxtTitle() {
@@ -34,11 +40,11 @@ public class TieuDiemView {
         this.txtTitle = txtTitle;
     }
 
-    public String getTxtLink() {
-        return txtLink;
+    public String getTxtUrlId() {
+        return txtUrlId;
     }
 
-    public void setTxtLink(String txtLink) {
-        this.txtLink = txtLink;
+    public void setTxtUrlId(String txtUrlId) {
+        this.txtUrlId = txtUrlId;
     }
 }

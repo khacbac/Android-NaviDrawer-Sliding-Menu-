@@ -1,12 +1,18 @@
 package thoxinhdep.kbbk.activity.main.fragment.tieudiem.view;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -23,60 +29,33 @@ import thoxinhdep.kbbk.activity.main.fragment.tieudiem.entity.TieuDiemView;
 import thoxinhdep.kbbk.activity.main.fragment.tieudiem.presenter.IeTieuDiemPresenter;
 import thoxinhdep.kbbk.activity.main.fragment.tieudiem.presenter.TieuDiemPresenter;
 import thoxinhdep.navigationdrawer.R;
+import thoxinhdep.navigationdrawer.databinding.FragmentTieudiemBinding;
 
-public class TieuDiemFragment extends BaseFragment implements IeTieuDiemFragment{
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class TieuDiemFragment extends BaseFragment
+        implements IeTieuDiemFragment, SearchView.OnQueryTextListener{
     private static final String TAG = TieuDiemFragment.class.getSimpleName();
-
-    private String ConstructType = Constants.TAG_TIEUDIEM;
     private IeTieuDiemPresenter ieTieuDiemPresenter;
-    private ArrayList<TieuDiemView> listTieuDiem = new ArrayList<>();
     private CustomTieuDiemAdapter layoutAdapter;
-
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
-    @BindView(R.id.avLoadingIndicate)
-    AVLoadingIndicatorView loadingIndicatorView;
-
-    public TieuDiemFragment() {
-        // Required empty public constructor
-    }
-
+    private FragmentTieudiemBinding binding;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_tieudiem, container, false);
-        ButterKnife.bind(this,view);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-//        imgIconHome.setImageDrawable(getResources().getDrawable(R.drawable.images_luffy));
-//
-//        // Allow zoom in,zoom out image view.
-//        PhotoViewAttacher photoViewAttacher = new PhotoViewAttacher(imgIconHome);
-//        photoViewAttacher.update();
+        return binding.getRoot();
+    }
 
-        return view;
+    @Override
+    public void bindingLayout(LayoutInflater inflater, ViewGroup container) {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tieudiem, container, false);
     }
 
     @Override
     public void initAllView() {
-        loadingIndicatorView.show();
-
+        binding.avLoadingIndicate.show();
         ieTieuDiemPresenter = new TieuDiemPresenter(this);
-        layoutAdapter = new CustomTieuDiemAdapter(listTieuDiem, getActivity());
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(layoutAdapter);
+        layoutAdapter = new CustomTieuDiemAdapter();
+        binding.setAdapter(layoutAdapter);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -98,19 +77,11 @@ public class TieuDiemFragment extends BaseFragment implements IeTieuDiemFragment
         super.onDetach();
     }
 
-    public String getConstructType() {
-        return ConstructType;
-    }
-
-    public void setConstructType(String constructType) {
-        this.ConstructType = constructType;
-    }
-
     @Override
     public void onSuccessGetTieuDiemData(ArrayList<TieuDiemView> listTieuDiem) {
         if (listTieuDiem.size() > 0) {
             layoutAdapter.setTieuDiemList(listTieuDiem);
-            loadingIndicatorView.hide();
+            binding.avLoadingIndicate.hide();
         }
     }
 
@@ -119,4 +90,26 @@ public class TieuDiemFragment extends BaseFragment implements IeTieuDiemFragment
         Log.d(TAG, "onErrorGetTieuDiemData: get link error");
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        Log.d(TAG, "onCreateOptionsMenu: called");
+        getActivity().getMenuInflater().inflate(R.menu.search_main, menu);
+        MenuItem item = menu.findItem(R.id.searchMain);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setOnQueryTextListener(this);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        Log.d(TAG, "onQueryTextSubmit: called");
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        Log.d(TAG, "onQueryTextChange: called");
+        layoutAdapter.getFilter().filter(newText);
+        return false;
+    }
 }

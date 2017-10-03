@@ -1,44 +1,37 @@
 package thoxinhdep.kbbk.activity.main.fragment.tieudiem.adapter;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Filter;
+import android.widget.Filterable;
 import java.util.ArrayList;
-
 import thoxinhdep.kbbk.activity.main.fragment.tieudiem.entity.TieuDiemView;
-import thoxinhdep.kbbk.customviews.TieuDiemLayoutView;
-import thoxinhdep.kbbk.untils.NavigateActivityUtils;
 import thoxinhdep.navigationdrawer.R;
+import thoxinhdep.navigationdrawer.databinding.LayoutTieudiemAdapterBinding;
 
 /**
  * Created by ThoXinhDep on 9/28/2017.
  */
 
-public class CustomTieuDiemAdapter extends RecyclerView.Adapter<CustomTieuDiemAdapter.MyViewHolder> {
+public class CustomTieuDiemAdapter extends RecyclerView.Adapter<CustomTieuDiemAdapter.MyViewHolder> implements Filterable {
 
     private static final String TAG = CustomTieuDiemAdapter.class.getSimpleName();
-    private ArrayList<TieuDiemView> listTieuDiem;
-    private Context context;
+    private ArrayList<TieuDiemView> listTieuDiem = new ArrayList<>();
+    private ArrayList<TieuDiemView> listFilter = new ArrayList<>();
 
-    public CustomTieuDiemAdapter(ArrayList<TieuDiemView> listTieuDiem) {
-        this.listTieuDiem = listTieuDiem;
-    }
-
-    public CustomTieuDiemAdapter(ArrayList<TieuDiemView> listTieuDiem, Context context) {
-        this.listTieuDiem = listTieuDiem;
-        this.context = context;
+    public CustomTieuDiemAdapter() {
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context)
-                .inflate(R.layout.layout_tieudiem_adapter,parent,false);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.layout_tieudiem_adapter,parent,false);
         return new MyViewHolder(view);
     }
 
@@ -46,17 +39,9 @@ public class CustomTieuDiemAdapter extends RecyclerView.Adapter<CustomTieuDiemAd
     public void onBindViewHolder(MyViewHolder holder,
                                  @SuppressLint("RecyclerView") final int position) {
         final TieuDiemView tieuDiemView = listTieuDiem.get(position);
-        holder.layoutView.setTitle(tieuDiemView.getTxtTitle());
-        holder.layoutView.setImageAvatarUrl(context,tieuDiemView.getAvatarUrl());
+        holder.binding.setTieudiemview(tieuDiemView);
         Log.d(TAG, "onBindViewHolder: url = " + tieuDiemView.getAvatarUrl());
 
-        holder.layoutView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavigateActivityUtils.handleSwitchToAboutScreen(
-                        (Activity) context, tieuDiemView.getTxtLink());
-            }
-        });
     }
 
     @Override
@@ -64,18 +49,57 @@ public class CustomTieuDiemAdapter extends RecyclerView.Adapter<CustomTieuDiemAd
         return listTieuDiem.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        return new filter();
+    }
+
+    private class filter extends Filter {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            if (constraint != null && constraint.length() > 0) {
+                ArrayList<TieuDiemView> filterList = new ArrayList<>();
+                for (int i = 0; i < listFilter.size(); i++) {
+                    if ((listFilter.get(i).getTxtTitle().toUpperCase())
+                            .contains(constraint.toString().toUpperCase())) {
+                        TieuDiemView viewFilter = new TieuDiemView();
+                        viewFilter.setTxtTitle(listFilter.get(i).getTxtTitle());
+                        viewFilter.setAvatarUrl(listFilter.get(i).getAvatarUrl());
+                        viewFilter.setTxtUrlId(listFilter.get(i).getTxtUrlId());
+                        filterList.add(viewFilter);
+                    }
+                }
+                results.count = filterList.size();
+                results.values = filterList;
+            } else {
+                results.count = listFilter.size();
+                results.values = listFilter;
+            }
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            listTieuDiem = (ArrayList<TieuDiemView>) results.values;
+            notifyDataSetChanged();
+        }
+    }
+
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TieuDiemLayoutView layoutView;
+        private LayoutTieudiemAdapterBinding binding;
 
         MyViewHolder(View itemView) {
             super(itemView);
-            layoutView = (TieuDiemLayoutView) itemView.findViewById(R.id.linearLayoutView);
+            binding = DataBindingUtil.bind(itemView);
         }
     }
 
     public void setTieuDiemList(ArrayList<TieuDiemView> listTieuDiem) {
         this.listTieuDiem = listTieuDiem;
+        listFilter = listTieuDiem;
         notifyDataSetChanged();
     }
 

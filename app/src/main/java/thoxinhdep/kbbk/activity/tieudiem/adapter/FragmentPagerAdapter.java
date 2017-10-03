@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import thoxinhdep.kbbk.activity.tieudiem.fragment.chapter.view.ChapterFragment;
-import thoxinhdep.kbbk.activity.tieudiem.fragment.CommentFragment;
-import thoxinhdep.kbbk.activity.tieudiem.fragment.InfoFragment;
+import thoxinhdep.kbbk.activity.tieudiem.fragment.comment.CommentFragment;
+import thoxinhdep.kbbk.activity.tieudiem.fragment.info.InfoFragment;
 
 /**
  * Created by ThoXinhDep on 9/28/2017.

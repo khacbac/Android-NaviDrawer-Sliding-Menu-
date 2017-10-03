@@ -1,4 +1,4 @@
-package thoxinhdep.kbbk.activity.doc.model;
+package thoxinhdep.kbbk.activity.doctruyen.model;
 
 import android.util.Log;
 
@@ -14,7 +14,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import thoxinhdep.kbbk.activity.doc.entity.DocView;
+import thoxinhdep.kbbk.activity.doctruyen.entity.DocView;
 import thoxinhdep.kbbk.helper.ApiUtils;
 
 /**

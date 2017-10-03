@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <thoxinhdep.kbbk.activity.tieudiem.fragment.customview.ChapterLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/chapterLayout"/>
-</LinearLayout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="chapterView"
+            type="thoxinhdep.kbbk.activity.tieudiem.fragment.chapter.entity.ChapterView"/>
+    </data>
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <thoxinhdep.kbbk.activity.tieudiem.fragment.customview.ChapterLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/chapterLayout"
+            bind:chapter="@{chapterView}"
+            bind:onItemClick="@{chapterView.link}"
+            android:alpha="0.5"/>
+    </LinearLayout>
+</layout>

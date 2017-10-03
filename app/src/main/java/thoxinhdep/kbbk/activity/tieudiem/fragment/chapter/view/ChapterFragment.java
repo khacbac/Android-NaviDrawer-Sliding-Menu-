@@ -1,46 +1,23 @@
 package thoxinhdep.kbbk.activity.tieudiem.fragment.chapter.view;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
-
-import com.wang.avi.AVLoadingIndicatorView;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
+import android.widget.Toast;
 import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import thoxinhdep.kbbk.activity.main.fragment.tieudiem.adapter.CustomTieuDiemAdapter;
 import thoxinhdep.kbbk.activity.tieudiem.fragment.adapter.CustomChapterAdapter;
 import thoxinhdep.kbbk.activity.tieudiem.fragment.chapter.entity.ChapterView;
 import thoxinhdep.kbbk.activity.tieudiem.fragment.chapter.presenter.ChapterPresenter;
 import thoxinhdep.kbbk.activity.tieudiem.fragment.chapter.presenter.IeChapterPresenter;
-import thoxinhdep.kbbk.base.BaseFragment;
 import thoxinhdep.kbbk.base.BaseTieuDiemFragment;
-import thoxinhdep.kbbk.constant.Constants;
-import thoxinhdep.kbbk.helper.ApiUtils;
+import thoxinhdep.kbbk.common.EndlessScrollListener;
 import thoxinhdep.navigationdrawer.R;
+import thoxinhdep.navigationdrawer.databinding.FragmentChapterBinding;
 
 /**
  * Created by ThoXinhDep on 9/28/2017.
@@ -48,44 +25,39 @@ import thoxinhdep.navigationdrawer.R;
 
 // In this case, the fragment displays simple text based on the page
 public class ChapterFragment extends BaseTieuDiemFragment implements IeChapterFragment{
-    public static final String ARG_PAGE = "ARG_PAGE";
     private static final String TAG = ChapterFragment.class.getSimpleName();
-
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
-    @BindView(R.id.aviIndicateView)
-    AVLoadingIndicatorView aviIndicateView;
-
     private IeChapterPresenter ieChapterPresenter;
-    private ArrayList<ChapterView> listTieuDiem = new ArrayList<>();
     private CustomChapterAdapter layoutAdapter;
+    private FragmentChapterBinding binding;
 
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        mPage = getArguments().getInt(ARG_PAGE);
-        Log.d(TAG, "onCreate: called");
-    }
-
-    // Inflate the fragment layout we defined above for this fragment
-    // Set the associated text for the title
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_chapter, container, false);
-        ButterKnife.bind(this,view);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return view;
+        return binding.getRoot();
     }
+
+    @Override
+    public void bindingLayout(LayoutInflater inflater, ViewGroup container) {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_chapter, container, false);
+    }
+
 
     @Override
     public void initAllView() {
         ieChapterPresenter = new ChapterPresenter(this);
-        layoutAdapter = new CustomChapterAdapter(getActivity());
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(layoutAdapter);
+        layoutAdapter = new CustomChapterAdapter();
+        binding.setAdapter(layoutAdapter);
+//        binding.recyclerView.addOnScrollListener(new EndlessScrollListener() {
+//            @Override
+//            public boolean onLoadMore(int page, int totalItemsCount) {
+//                // Triggered only when new data needs to be appended to the list
+//                // Add whatever code is needed to append new items to your AdapterView
+//                loadNextDataFromApi(page);
+//                // or loadNextDataFromApi(totalItemsCount);
+//                return true; // ONLY if more data is actually being loaded; false otherwise.
+//            }
+//        });
 //        setHasOptionsMenu(true);
     }
 
@@ -101,19 +73,20 @@ public class ChapterFragment extends BaseTieuDiemFragment implements IeChapterFr
     @Override
     public void onLoadListChapter(String url) {
         super.onLoadListChapter(url);
-        aviIndicateView.show();
+        binding.aviIndicateView.show();
         ieChapterPresenter.loadAllChapter(url);
     }
 
     @Override
     public void onSuccessLoadAllChapter(ArrayList<ChapterView> listChapter) {
+        Log.d(TAG, "onSuccessLoadAllChapter: size = " + listChapter.size());
         layoutAdapter.setChapterList(listChapter);
-        aviIndicateView.hide();
+        binding.aviIndicateView.hide();
     }
 
     @Override
     public void onErrorLoadAllChapter() {
-
+        Toast.makeText(getActivity(), getString(R.string.str_error_load_data),Toast.LENGTH_SHORT).show();
     }
 
     @Override

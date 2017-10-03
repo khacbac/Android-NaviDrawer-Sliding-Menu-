@@ -1,4 +1,4 @@
-package thoxinhdep.kbbk.activity.doc.entity;
+package thoxinhdep.kbbk.activity.doctruyen.entity;
 
 /**
  * Created by VST on 9/28/2017.

@@ -1,11 +1,11 @@
-package thoxinhdep.kbbk.activity.doc.presenter;
+package thoxinhdep.kbbk.activity.doctruyen.presenter;
 
 import java.util.ArrayList;
 
-import thoxinhdep.kbbk.activity.doc.entity.DocView;
-import thoxinhdep.kbbk.activity.doc.model.DocTruyenModel;
-import thoxinhdep.kbbk.activity.doc.model.IeDocTruyenModel;
-import thoxinhdep.kbbk.activity.doc.view.IeDocTruyenActivity;
+import thoxinhdep.kbbk.activity.doctruyen.entity.DocView;
+import thoxinhdep.kbbk.activity.doctruyen.model.DocTruyenModel;
+import thoxinhdep.kbbk.activity.doctruyen.model.IeDocTruyenModel;
+import thoxinhdep.kbbk.activity.doctruyen.view.IeDocTruyenActivity;
 
 /**
  * Created by ThoXinhDep on 9/29/2017.

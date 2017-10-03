@@ -1,8 +1,8 @@
-package thoxinhdep.kbbk.activity.doc.view;
+package thoxinhdep.kbbk.activity.doctruyen.view;
 
 import java.util.ArrayList;
 
-import thoxinhdep.kbbk.activity.doc.entity.DocView;
+import thoxinhdep.kbbk.activity.doctruyen.entity.DocView;
 
 /**
  * Created by ThoXinhDep on 9/29/2017.

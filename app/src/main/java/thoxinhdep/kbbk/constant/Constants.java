@@ -8,6 +8,8 @@ package thoxinhdep.kbbk.constant;
 public class Constants {
     // Home url for get all source.
     public static final String URL_HOME = "http://mangak.info/";
+    public static final String URL_SHORTLINK = "http://mangak.info/?p=";
+    public static final String TAG_SHORTLINK = "?p=";
     // Tag for all menu.
     public static final String TAG_TIEUDIEM_CLASS = "feature_topxem";
     public static final String TAG_MOIDANG_CLASS = "moiup";

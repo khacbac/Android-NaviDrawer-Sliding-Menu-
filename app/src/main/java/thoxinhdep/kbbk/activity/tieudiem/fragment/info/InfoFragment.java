@@ -1,7 +1,6 @@
-package thoxinhdep.kbbk.activity.tieudiem.fragment;
+package thoxinhdep.kbbk.activity.tieudiem.fragment.info;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,19 +17,17 @@ import thoxinhdep.navigationdrawer.R;
  */
 
 // In this case, the fragment displays simple text based on the page
-public class CommentFragment extends BaseTieuDiemFragment {
+public class InfoFragment extends BaseTieuDiemFragment {
     public static final String ARG_PAGE = "ARG_PAGE";
-    private static final String TAG = CommentFragment.class.getSimpleName();
+    private static final String TAG = InfoFragment.class.getSimpleName();
 
     @BindView(R.id.tvTitle)
     TextView tvTitle;
 
-    private int mPage;
-
-    public static CommentFragment newInstance(int page) {
+    public static InfoFragment newInstance(int page) {
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, page);
-        CommentFragment fragment = new CommentFragment();
+        InfoFragment fragment = new InfoFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -45,10 +42,15 @@ public class CommentFragment extends BaseTieuDiemFragment {
     // Set the associated text for the title
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_comment, container, false);
+        View view = inflater.inflate(R.layout.fragment_info, container, false);
         ButterKnife.bind(this,view);
         super.onCreateView(inflater, container, savedInstanceState);
         return view;
+    }
+
+    @Override
+    public void bindingLayout(LayoutInflater inflater, ViewGroup container) {
+
     }
 
     @Override
@@ -57,7 +59,7 @@ public class CommentFragment extends BaseTieuDiemFragment {
 
     @Override
     public void initAllData() {
-        tvTitle.setText("Fragment Comment");
+        tvTitle.setText("Fragment Info");
     }
 
     @Override
@@ -66,8 +68,8 @@ public class CommentFragment extends BaseTieuDiemFragment {
     }
 
     @Override
-    public void onLoadComment(String url) {
-        super.onLoadComment(url);
+    public void onLoadInfomation(String url) {
+        super.onLoadInfomation(url);
         Log.d(TAG, "onLoadListChapter: url = " + url);
     }
 }

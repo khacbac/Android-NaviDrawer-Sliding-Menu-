@@ -1,38 +1,26 @@
-package thoxinhdep.kbbk.activity.doc.view;
+package thoxinhdep.kbbk.activity.doctruyen.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager;
 import com.wang.avi.AVLoadingIndicatorView;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import thoxinhdep.kbbk.activity.doc.adapter.CustomDocAdapter;
-import thoxinhdep.kbbk.activity.doc.entity.DocView;
-import thoxinhdep.kbbk.activity.doc.presenter.DocTruyenPresenter;
-import thoxinhdep.kbbk.activity.doc.presenter.IeDocTruyenPresenter;
+import thoxinhdep.kbbk.activity.doctruyen.adapter.CustomDocAdapter;
+import thoxinhdep.kbbk.activity.doctruyen.entity.DocView;
+import thoxinhdep.kbbk.activity.doctruyen.presenter.DocTruyenPresenter;
+import thoxinhdep.kbbk.activity.doctruyen.presenter.IeDocTruyenPresenter;
 import thoxinhdep.kbbk.base.BaseActivity;
 import thoxinhdep.kbbk.constant.Constants;
-import thoxinhdep.kbbk.helper.ApiUtils;
 import thoxinhdep.navigationdrawer.R;
 
 /**

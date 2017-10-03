@@ -1,17 +1,16 @@
-package thoxinhdep.kbbk.activity.doc.adapter;
+package thoxinhdep.kbbk.activity.doctruyen.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import thoxinhdep.kbbk.activity.doc.customview.DocLayout;
-import thoxinhdep.kbbk.activity.doc.entity.DocView;
+import thoxinhdep.kbbk.activity.doctruyen.customview.DocLayout;
+import thoxinhdep.kbbk.activity.doctruyen.entity.DocView;
 import thoxinhdep.navigationdrawer.R;
 
 /**

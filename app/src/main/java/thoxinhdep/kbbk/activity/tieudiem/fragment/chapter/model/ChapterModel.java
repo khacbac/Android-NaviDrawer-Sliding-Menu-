@@ -1,5 +1,6 @@
 package thoxinhdep.kbbk.activity.tieudiem.fragment.chapter.model;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import org.jsoup.Jsoup;
@@ -25,6 +26,7 @@ import thoxinhdep.kbbk.helper.ApiUtils;
 public class ChapterModel implements IeChapterModel {
 
     private static final String TAG = ChapterModel.class.getSimpleName();
+    private ArrayList<ChapterView> listChapter = new ArrayList<>();
 
     @Override
     public void loadAllChapter(String urlGet, final IeOnFisnishLoadAllChapter loadAllChapter) {
@@ -34,8 +36,8 @@ public class ChapterModel implements IeChapterModel {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    ArrayList<ChapterView> listChapter = new ArrayList<ChapterView>();
                     String html = response.body().string();
+                    Log.d(TAG, "onResponse: html = " + html);
 
                     Document document = Jsoup.parse(html);
                     Elements rootElements = document.getElementsByClass("chapter-list");

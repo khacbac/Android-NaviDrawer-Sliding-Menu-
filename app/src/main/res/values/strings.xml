@@ -6,6 +6,8 @@
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
 
+    <string name="str_error_load_data">Error, Please check your Internet connection</string>
+
     <!-- Navigation Drawer menu labels -->
     <string name="nav_tieudiem">Truyện tranh tiêu điểm</string>
     <string name="nav_moidang">Truyện mới đăng</string>

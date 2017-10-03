@@ -20,6 +20,9 @@ public interface ApiServer {
     @GET("wp-content/themes/manga/list-manga-front.js?nocache=1506538619")
     Call<ResponseBody> getAllHomeData();
 
+    @GET("wp-content/themes/manga/list-manga-home.js?nocache=1507009962")
+    Call<ResponseBody> getAllHomeEntity();
+
     @GET
     Call<ResponseBody> getAllDetailData(@Url String url);
 

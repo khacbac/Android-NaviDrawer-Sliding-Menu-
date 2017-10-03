@@ -1,9 +1,11 @@
 package thoxinhdep.kbbk.customviews;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -12,7 +14,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import thoxinhdep.kbbk.activity.main.fragment.tieudiem.adapter.CustomTieuDiemAdapter;
+import thoxinhdep.kbbk.activity.main.fragment.tieudiem.entity.TieuDiemView;
 import thoxinhdep.navigationdrawer.R;
+import thoxinhdep.navigationdrawer.databinding.LayoutTieudiemViewBinding;
 
 /**
  * Created by ThoXinhDep on 9/28/2017.
@@ -20,10 +25,7 @@ import thoxinhdep.navigationdrawer.R;
 
 public class TieuDiemLayoutView extends RelativeLayout {
 
-    @BindView(R.id.txtTitle)
-    TextView txtTitle;
-    @BindView(R.id.imageAvatar)
-    ImageView imageAvatar;
+    private LayoutTieudiemViewBinding binding;
 
     public TieuDiemLayoutView(Context context) {
         super(context);
@@ -41,27 +43,13 @@ public class TieuDiemLayoutView extends RelativeLayout {
     }
 
     private void init(Context context) {
-        View rootView = inflate(context, R.layout.layout_tieudiem_view,this);
-        rootView.setPadding(10,10,10,10);
-        ButterKnife.bind(this);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        binding = DataBindingUtil.inflate(inflater, R.layout.layout_tieudiem_view, this, true);
+        View view = binding.getRoot();
+        view.setPadding(10,10,10,10);
     }
 
-    public void setImageAvatarDrawable(Drawable drawable) {
-        imageAvatar.setImageDrawable(drawable);
+    public void bindDingTieuDiemView(TieuDiemView view) {
+        binding.setTieudiemview(view);
     }
-
-    public void setImageAvatarUrl(Context context,String imageUrl) {
-        // Loading profile image
-        Glide.with(context).load(imageUrl)
-                .crossFade()
-                .thumbnail(0.5f)
-                .centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(imageAvatar);
-    }
-
-    public void setTitle(String title) {
-        txtTitle.setText(title);
-    }
-
 }

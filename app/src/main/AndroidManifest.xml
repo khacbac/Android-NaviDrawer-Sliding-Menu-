@@ -27,7 +27,7 @@
             android:name="thoxinhdep.kbbk.activity.privacy.PrivacyPolicyActivity"
             android:label="@string/activity_title_privacy_policy" />
         <activity
-            android:name="thoxinhdep.kbbk.activity.doc.view.DocTruyenActivity"
+            android:name="thoxinhdep.kbbk.activity.doctruyen.view.DocTruyenActivity"
             android:label="@string/activity_title_doc" />
     </application>
 

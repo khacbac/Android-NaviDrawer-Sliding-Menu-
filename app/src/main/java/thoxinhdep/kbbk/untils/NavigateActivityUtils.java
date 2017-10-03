@@ -3,7 +3,7 @@ package thoxinhdep.kbbk.untils;
 import android.app.Activity;
 import android.content.Intent;
 
-import thoxinhdep.kbbk.activity.doc.view.DocTruyenActivity;
+import thoxinhdep.kbbk.activity.doctruyen.view.DocTruyenActivity;
 import thoxinhdep.kbbk.activity.tieudiem.view.TieuDiemActivity;
 import thoxinhdep.kbbk.activity.privacy.PrivacyPolicyActivity;
 import thoxinhdep.kbbk.constant.Constants;

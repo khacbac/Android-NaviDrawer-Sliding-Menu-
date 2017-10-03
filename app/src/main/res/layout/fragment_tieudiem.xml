@@ -1,20 +1,30 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="thoxinhdep.kbbk.activity.main.fragment.tieudiem.view.TieuDiemFragment">
-
-    <android.support.v7.widget.RecyclerView
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="adapter"
+            type="thoxinhdep.kbbk.activity.main.fragment.tieudiem.adapter.CustomTieuDiemAdapter"/>
+    </data>
+    <FrameLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recyclerView" />
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context="thoxinhdep.kbbk.activity.main.fragment.tieudiem.view.TieuDiemFragment">
 
-    <com.wang.avi.AVLoadingIndicatorView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:id="@+id/avLoadingIndicate"
-        app:indicatorName="BallClipRotateMultipleIndicator"
-        app:indicatorColor="@color/text_cashbook_2"/>
-</FrameLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerView"
+            bind:adapter="@{adapter}"/>
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:id="@+id/avLoadingIndicate"
+            app:indicatorName="BallClipRotateMultipleIndicator"
+            app:indicatorColor="@color/text_cashbook_2"/>
+    </FrameLayout>
+</layout>
+

@@ -53,6 +53,11 @@ public class MoiDangFragment extends BaseFragment implements IeMoiDangFragment{
     }
 
     @Override
+    public void bindingLayout(LayoutInflater inflater, ViewGroup container) {
+
+    }
+
+    @Override
     public void initAllView() {
         ieMoiDangPresenter = new MoiDangPresenter(this);
         layoutAdapter = new CustomMoiDangAdapter(listTieuDiem, getActivity());
