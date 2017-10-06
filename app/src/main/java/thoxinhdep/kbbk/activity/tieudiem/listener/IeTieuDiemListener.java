@@ -5,5 +5,5 @@ package thoxinhdep.kbbk.activity.tieudiem.listener;
  */
 
 public interface IeTieuDiemListener {
-    void onLoadAllListChapter(String url);
+    void onLoadAllListChapter(String intentUrl, String urlID);
 }

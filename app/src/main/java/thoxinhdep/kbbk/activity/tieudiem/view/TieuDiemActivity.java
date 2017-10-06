@@ -24,6 +24,7 @@ public class TieuDiemActivity extends BaseActivity {
     private static final String TAG = TieuDiemActivity.class.getSimpleName();
 
     private String intentUrl;
+    private String intentUrlID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,9 @@ public class TieuDiemActivity extends BaseActivity {
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         intentUrl = getIntent().getStringExtra(Constants.TAG_TIEUDIEM);
+        intentUrlID = getIntent().getStringExtra(Constants.TAG_URLID);
         Log.d(TAG, "initView: url from tieu diem = " + intentUrl);
+        Log.d(TAG, "initView: url id from tieu diem = " + intentUrlID);
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -91,6 +94,6 @@ public class TieuDiemActivity extends BaseActivity {
     }
     // Start load data for every Fragment.
     public void setOnTieuDiemListener(IeTieuDiemListener listener) {
-        listener.onLoadAllListChapter(intentUrl);
+        listener.onLoadAllListChapter(intentUrl, intentUrlID);
     }
 }

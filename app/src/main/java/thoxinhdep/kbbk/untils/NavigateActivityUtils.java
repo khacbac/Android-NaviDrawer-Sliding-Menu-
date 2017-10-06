@@ -20,9 +20,10 @@ public class NavigateActivityUtils {
         activity.startActivity(intent);
     }
 
-    public static void handleSwitchToAboutScreen(Activity activity, String url) {
+    public static void handleSwitchToAboutScreen(Activity activity, String url, String urlID) {
         Intent intent = new Intent(activity, TieuDiemActivity.class);
         intent.putExtra(Constants.TAG_TIEUDIEM, url);
+        intent.putExtra(Constants.TAG_URLID, urlID);
         activity.startActivity(intent);
     }
 

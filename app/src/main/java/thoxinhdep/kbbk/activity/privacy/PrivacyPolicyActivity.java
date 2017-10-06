@@ -1,10 +1,18 @@
 package thoxinhdep.kbbk.activity.privacy;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import thoxinhdep.kbbk.base.BaseActivity;
+import thoxinhdep.kbbk.test.CustomDialog;
 import thoxinhdep.navigationdrawer.R;
+
 
 public class PrivacyPolicyActivity extends BaseActivity {
 
@@ -15,6 +23,7 @@ public class PrivacyPolicyActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate: Privacy Policy Activity");
         setContentView(R.layout.activity_privacy_policy);
+        ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -54,4 +63,17 @@ public class PrivacyPolicyActivity extends BaseActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void showYesNoDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        CustomDialog editNameDialogFragment = CustomDialog.newInstance("Some Title");
+        editNameDialogFragment.show(fm, "fragment_edit_name");
+    }
+
+    @OnClick(R.id.onBtnShow)
+    public void onBtnShowClick(View view) {
+//        showYesNoDialog();
+
+    }
+
 }

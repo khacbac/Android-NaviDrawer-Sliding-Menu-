@@ -16,6 +16,8 @@ import thoxinhdep.kbbk.activity.tieudiem.fragment.chapter.presenter.ChapterPrese
 import thoxinhdep.kbbk.activity.tieudiem.fragment.chapter.presenter.IeChapterPresenter;
 import thoxinhdep.kbbk.base.BaseTieuDiemFragment;
 import thoxinhdep.kbbk.common.EndlessScrollListener;
+import thoxinhdep.kbbk.database.TruyenEntity;
+import thoxinhdep.kbbk.database.TruyenTranhDBHelper;
 import thoxinhdep.navigationdrawer.R;
 import thoxinhdep.navigationdrawer.databinding.FragmentChapterBinding;
 
@@ -63,6 +65,7 @@ public class ChapterFragment extends BaseTieuDiemFragment implements IeChapterFr
 
     @Override
     public void initAllData() {
+
     }
 
     @Override
@@ -71,17 +74,30 @@ public class ChapterFragment extends BaseTieuDiemFragment implements IeChapterFr
     }
 
     @Override
-    public void onLoadListChapter(String url) {
-        super.onLoadListChapter(url);
+    public void onLoadListChapter(String intentUrl, String urlId) {
+        super.onLoadListChapter(intentUrl, urlId);
         binding.aviIndicateView.show();
-        ieChapterPresenter.loadAllChapter(url);
+        ieChapterPresenter.loadAllChapter(intentUrl, urlId);
     }
 
     @Override
     public void onSuccessLoadAllChapter(ArrayList<ChapterView> listChapter) {
-        Log.d(TAG, "onSuccessLoadAllChapter: size = " + listChapter.size());
+        if (listChapter.isEmpty()) {
+            return;
+        }
         layoutAdapter.setChapterList(listChapter);
         binding.aviIndicateView.hide();
+
+        Log.d(TAG, "onSuccessLoadAllChapter: size = " + listChapter.size());
+        TruyenTranhDBHelper dbHelper = new TruyenTranhDBHelper(getActivity());
+        TruyenEntity entity = dbHelper.getTruyenTranhByTruyenId(listChapter.get(0).getUrlID());
+        ArrayList<String> listTitleClick = entity.getListCLicked();
+        for (String title : listTitleClick) {
+            Log.d(TAG, "onSuccessLoadAllChapter: item has click = " + title);
+        }
+
+        dbHelper.close();
+
     }
 
     @Override

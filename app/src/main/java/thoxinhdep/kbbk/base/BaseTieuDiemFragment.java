@@ -1,11 +1,8 @@
 package thoxinhdep.kbbk.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,13 +39,13 @@ public abstract class BaseTieuDiemFragment extends BaseFragment implements IeTie
     }
 
     @Override
-    public void onLoadAllListChapter(String url) {
-        onLoadListChapter(url);
-        onLoadInfomation(url);
-        onLoadComment(url);
+    public void onLoadAllListChapter(String intentUrl, String urlId) {
+        onLoadListChapter(intentUrl,urlId);
+        onLoadInfomation(intentUrl);
+        onLoadComment(intentUrl);
     }
 
-    public void onLoadListChapter(String url) {
+    public void onLoadListChapter(String intentUrl, String urlId) {
 
     }
     public void onLoadInfomation(String url) {

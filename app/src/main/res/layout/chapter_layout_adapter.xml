@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/chapterLayout"
             bind:chapter="@{chapterView}"
-            bind:onItemClick="@{chapterView.link}"
-            android:alpha="0.5"/>
+            bind:backGroundColor="@{chapterView.isHadClick ? @drawable/bg_single_layout_test : @drawable/bg_single_layout}"
+            />
     </LinearLayout>
 </layout>

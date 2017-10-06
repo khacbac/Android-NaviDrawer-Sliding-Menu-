@@ -22,8 +22,8 @@ public class ChapterPresenter implements IeChapterPresenter, IeChapterModel.IeOn
     }
 
     @Override
-    public void loadAllChapter(String urlGet) {
-        ieChapterModel.loadAllChapter(urlGet, this);
+    public void loadAllChapter(String urlGet, String urlId) {
+        ieChapterModel.loadAllChapter(urlGet, this, urlId);
     }
 
     @Override

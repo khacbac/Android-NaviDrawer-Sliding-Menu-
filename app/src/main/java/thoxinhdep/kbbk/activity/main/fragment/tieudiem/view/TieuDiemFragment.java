@@ -28,6 +28,8 @@ import thoxinhdep.kbbk.constant.Constants;
 import thoxinhdep.kbbk.activity.main.fragment.tieudiem.entity.TieuDiemView;
 import thoxinhdep.kbbk.activity.main.fragment.tieudiem.presenter.IeTieuDiemPresenter;
 import thoxinhdep.kbbk.activity.main.fragment.tieudiem.presenter.TieuDiemPresenter;
+import thoxinhdep.kbbk.database.TruyenEntity;
+import thoxinhdep.kbbk.database.TruyenTranhDBHelper;
 import thoxinhdep.navigationdrawer.R;
 import thoxinhdep.navigationdrawer.databinding.FragmentTieudiemBinding;
 
@@ -37,6 +39,7 @@ public class TieuDiemFragment extends BaseFragment
     private IeTieuDiemPresenter ieTieuDiemPresenter;
     private CustomTieuDiemAdapter layoutAdapter;
     private FragmentTieudiemBinding binding;
+    private TruyenTranhDBHelper dbHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,11 +59,27 @@ public class TieuDiemFragment extends BaseFragment
         layoutAdapter = new CustomTieuDiemAdapter();
         binding.setAdapter(layoutAdapter);
         setHasOptionsMenu(true);
+
+        dbHelper = new TruyenTranhDBHelper(getActivity());
+
     }
 
     @Override
     public void initAllData() {
         ieTieuDiemPresenter.getAllDataForTieuDiem();
+
+        int count = dbHelper.getTableCount();
+        Log.d(TAG, "initAllData: count = " + count);
+        for (int i = 1; i <= count; i++) {
+            TruyenEntity entity = dbHelper.getTruyenTranh(i);
+            if (entity != null) {
+                Log.d(TAG, "initAllView: title - " + i + " =  " + entity.getTruyenTitle());
+                Log.d(TAG, "initAllView: id - " + i + " =  " + entity.getTruyenId());
+                Log.d(TAG, "initAllView: list click - " + i + " =  " + entity.getListCLicked());
+            }
+        }
+
+        dbHelper.close();
     }
 
     @Override
@@ -82,6 +101,15 @@ public class TieuDiemFragment extends BaseFragment
         if (listTieuDiem.size() > 0) {
             layoutAdapter.setTieuDiemList(listTieuDiem);
             binding.avLoadingIndicate.hide();
+
+            for (TieuDiemView view : listTieuDiem) {
+                TruyenEntity entity = new TruyenEntity();
+                entity.setTruyenTitle(view.getTxtTitle());
+                entity.setTruyenId(view.getTxtUrlId());
+                entity.setListCLicked(new ArrayList<String>());
+                entity.setImageRead(new ArrayList<String>());
+                dbHelper.insertTruyenTranh(entity);
+            }
         }
     }
 
@@ -112,4 +140,5 @@ public class TieuDiemFragment extends BaseFragment
         layoutAdapter.getFilter().filter(newText);
         return false;
     }
+
 }

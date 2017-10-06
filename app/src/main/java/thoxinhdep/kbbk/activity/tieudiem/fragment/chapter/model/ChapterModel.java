@@ -1,6 +1,5 @@
 package thoxinhdep.kbbk.activity.tieudiem.fragment.chapter.model;
 
-import android.os.AsyncTask;
 import android.util.Log;
 
 import org.jsoup.Jsoup;
@@ -29,7 +28,7 @@ public class ChapterModel implements IeChapterModel {
     private ArrayList<ChapterView> listChapter = new ArrayList<>();
 
     @Override
-    public void loadAllChapter(String urlGet, final IeOnFisnishLoadAllChapter loadAllChapter) {
+    public void loadAllChapter(String urlGet, final IeOnFisnishLoadAllChapter loadAllChapter, final String urlId) {
         String data = urlGet.replaceAll(Constants.URL_HOME,"");
         Call<ResponseBody> getAllDataDetail = ApiUtils.getApiServer().getAllDetailData(data);
         getAllDataDetail.enqueue(new Callback<ResponseBody>() {
@@ -50,7 +49,7 @@ public class ChapterModel implements IeChapterModel {
                         for (Element child : urlTagA) {
                             String chapTitle = child.attr("title");
                             String chapLink = child.attr("href");
-                            ChapterView view = new ChapterView(chapTitle, ngayDang, chapLink);
+                            ChapterView view = new ChapterView(chapTitle, ngayDang, chapLink, urlId);
                             listChapter.add(view);
                         }
                     }

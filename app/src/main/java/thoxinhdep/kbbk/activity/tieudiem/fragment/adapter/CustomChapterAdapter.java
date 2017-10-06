@@ -19,6 +19,7 @@ import java.util.Date;
 
 import thoxinhdep.kbbk.activity.tieudiem.fragment.chapter.entity.ChapterView;
 import thoxinhdep.kbbk.activity.tieudiem.fragment.customview.ChapterLayout;
+import thoxinhdep.kbbk.database.TruyenTranhDBHelper;
 import thoxinhdep.kbbk.untils.NavigateActivityUtils;
 import thoxinhdep.navigationdrawer.R;
 import thoxinhdep.navigationdrawer.databinding.ChapterLayoutAdapterBinding;
@@ -47,6 +48,19 @@ public class CustomChapterAdapter extends RecyclerView.Adapter<CustomChapterAdap
                                  @SuppressLint("RecyclerView") final int position) {
         final ChapterView chapterView = listChapter.get(position);
         holder.binding.setChapterView(chapterView);
+        holder.binding.chapterLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.binding.chapterLayout.updateItemClick();
+//                layout.setBackground(drawable);
+//                layout.setAlpha(view.isHadClick() ? 1f : 0.5f);
+//                dbHelper = new TruyenTranhDBHelper(holder.binding.chapterLayout.getContext());
+//                // Them danh sach cac chap da xem tuy theo moi id cua truyen tuong ung.
+//                dbHelper.updateDataWithColumn(view.getUrlID(),view.getChapterTitle());
+//                NavigateActivityUtils.handleSwitchToDocScreen((Activity) layout.getContext(), view.getLink());
+//                Log.d(TAG, "onClick: url = " + view.getLink());
+            }
+        });
     }
 
     @Override
@@ -67,6 +81,13 @@ public class CustomChapterAdapter extends RecyclerView.Adapter<CustomChapterAdap
     public void setChapterList(ArrayList<ChapterView> listChapter) {
         this.listChapter = listChapter;
         notifyDataSetChanged();
+    }
+
+    public void setBackGroundForChapterHasClick(ArrayList<String> titleListClick) {
+        for (String title : titleListClick) {
+            if (listChapter.contains(title)) {
+            }
+        }
     }
 
     public void sortTangDan() {

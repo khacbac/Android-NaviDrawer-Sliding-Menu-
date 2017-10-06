@@ -15,5 +15,5 @@ public interface IeChapterModel {
         void onErrorLoadALlChapter();
     }
 
-    void loadAllChapter(String urlGet, IeOnFisnishLoadAllChapter loadAllChapter);
+    void loadAllChapter(String urlGet, IeOnFisnishLoadAllChapter loadAllChapter, String urlId);
 }

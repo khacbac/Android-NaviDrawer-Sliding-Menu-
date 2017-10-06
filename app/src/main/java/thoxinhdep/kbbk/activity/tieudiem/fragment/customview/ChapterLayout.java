@@ -44,14 +44,22 @@ public class ChapterLayout extends LinearLayout {
 
     private void initData(Context context) {
         setOrientation(HORIZONTAL);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             setBackground(getResources().getDrawable(R.drawable.bg_single_layout));
-        }
+//        }
         LayoutInflater inflater = LayoutInflater.from(context);
         binding = DataBindingUtil.inflate(inflater, R.layout.chapter_custom_layout, this, true);
     }
 
     public void bindChapterView(ChapterView view) {
         binding.setChapter(view);
+    }
+
+    public ChapterCustomLayoutBinding getBinding() {
+        return binding;
+    }
+
+    public void updateItemClick() {
+        setBackground(getResources().getDrawable(R.drawable.bg_single_layout_test));
     }
 }

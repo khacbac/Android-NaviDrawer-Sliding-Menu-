@@ -35,13 +35,14 @@ public class TieuDiemViewBinder {
     }
 
     @BindingAdapter("bind:onClick")
-    public static void bindOnClick(final ImageView imageView, final String urlId) {
+    public static void bindOnClick(final ImageView imageView, final TieuDiemView view) {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Chuyen huong sang man hinh hien thi thong tin va danh sach chapter.
                 NavigateActivityUtils.handleSwitchToAboutScreen(
-                        (Activity) imageView.getContext(), Constants.URL_SHORTLINK + urlId);
+                        (Activity) imageView.getContext(),
+                        Constants.URL_SHORTLINK + view.getTxtUrlId(), view.getTxtUrlId());
             }
         });
     }
