@@ -32,6 +32,8 @@ public class ChapterFragment extends BaseTieuDiemFragment implements IeChapterFr
     private CustomChapterAdapter layoutAdapter;
     private FragmentChapterBinding binding;
 
+    private TruyenTranhDBHelper dbHelper;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -50,6 +52,8 @@ public class ChapterFragment extends BaseTieuDiemFragment implements IeChapterFr
         ieChapterPresenter = new ChapterPresenter(this);
         layoutAdapter = new CustomChapterAdapter();
         binding.setAdapter(layoutAdapter);
+        dbHelper = new TruyenTranhDBHelper(getActivity());
+
 //        binding.recyclerView.addOnScrollListener(new EndlessScrollListener() {
 //            @Override
 //            public boolean onLoadMore(int page, int totalItemsCount) {
@@ -89,13 +93,12 @@ public class ChapterFragment extends BaseTieuDiemFragment implements IeChapterFr
         binding.aviIndicateView.hide();
 
         Log.d(TAG, "onSuccessLoadAllChapter: size = " + listChapter.size());
-        TruyenTranhDBHelper dbHelper = new TruyenTranhDBHelper(getActivity());
         TruyenEntity entity = dbHelper.getTruyenTranhByTruyenId(listChapter.get(0).getUrlID());
         ArrayList<String> listTitleClick = entity.getListCLicked();
         for (String title : listTitleClick) {
             Log.d(TAG, "onSuccessLoadAllChapter: item has click = " + title);
         }
-
+        layoutAdapter.setBackGroundForChapterHasClick(listTitleClick);
         dbHelper.close();
 
     }

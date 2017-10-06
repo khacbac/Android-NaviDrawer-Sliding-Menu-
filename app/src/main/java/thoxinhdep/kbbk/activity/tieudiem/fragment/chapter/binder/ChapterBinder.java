@@ -59,6 +59,7 @@ public class ChapterBinder {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                view.setHadClick(true);
                 layout.updateItemClick();
 //                layout.setBackground(drawable);
 //                layout.setAlpha(view.isHadClick() ? 1f : 0.5f);
@@ -71,8 +72,8 @@ public class ChapterBinder {
         });
     }
 
-    @BindingAdapter("bind:backGroundColor")
-    public static void bindBackGround(ChapterLayout layout, Drawable drawable) {
-        layout.setBackground(drawable);
+    @BindingAdapter("bind:textColor")
+    public static void bindTextColor(TextView textView, int color) {
+        textView.setTextColor(color);
     }
 }

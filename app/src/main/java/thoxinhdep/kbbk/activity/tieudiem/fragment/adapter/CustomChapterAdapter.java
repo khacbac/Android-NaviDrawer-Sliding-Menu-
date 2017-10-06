@@ -48,24 +48,21 @@ public class CustomChapterAdapter extends RecyclerView.Adapter<CustomChapterAdap
                                  @SuppressLint("RecyclerView") final int position) {
         final ChapterView chapterView = listChapter.get(position);
         holder.binding.setChapterView(chapterView);
-        holder.binding.chapterLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.binding.chapterLayout.updateItemClick();
-//                layout.setBackground(drawable);
-//                layout.setAlpha(view.isHadClick() ? 1f : 0.5f);
-//                dbHelper = new TruyenTranhDBHelper(holder.binding.chapterLayout.getContext());
-//                // Them danh sach cac chap da xem tuy theo moi id cua truyen tuong ung.
-//                dbHelper.updateDataWithColumn(view.getUrlID(),view.getChapterTitle());
-//                NavigateActivityUtils.handleSwitchToDocScreen((Activity) layout.getContext(), view.getLink());
-//                Log.d(TAG, "onClick: url = " + view.getLink());
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
         return listChapter.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -75,6 +72,7 @@ public class CustomChapterAdapter extends RecyclerView.Adapter<CustomChapterAdap
         MyViewHolder(View itemView) {
             super(itemView);
             binding = DataBindingUtil.bind(itemView);
+            binding.executePendingBindings();
         }
     }
 
@@ -84,10 +82,12 @@ public class CustomChapterAdapter extends RecyclerView.Adapter<CustomChapterAdap
     }
 
     public void setBackGroundForChapterHasClick(ArrayList<String> titleListClick) {
-        for (String title : titleListClick) {
-            if (listChapter.contains(title)) {
+        for (ChapterView view : listChapter) {
+            if (titleListClick.contains(view.getChapterTitle())) {
+                view.setHadClick(true);
             }
         }
+        notifyDataSetChanged();
     }
 
     public void sortTangDan() {

@@ -14,7 +14,8 @@
             android:textSize="16sp"
             android:id="@+id/txtTitle"
             android:padding="5dp"
-            android:text="@{chapter.chapterTitle}"/>
+            android:text="@{chapter.chapterTitle}"
+            bind:textColor="@{chapter.isHadClick ? @color/red : @color/cyan}"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -23,6 +24,7 @@
             android:gravity="center_vertical"
             android:id="@+id/txtNgayDang"
             android:padding="5dp"
+            bind:textColor="@{chapter.isHadClick ? @color/red : @color/cyan}"
             android:text="@{chapter.ngayDang}"/>
     </merge>
 </layout>
